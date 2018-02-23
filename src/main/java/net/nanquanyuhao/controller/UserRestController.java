@@ -22,7 +22,12 @@ public class UserRestController {
 
     @RequestMapping(value = "/users", method=RequestMethod.POST)
     public void save(@RequestBody User user) {
-        userRepository.save(user);
+
+        // 额外添加已存在的判断
+        User old  = userRepository.find(user.getId());
+        if (old == null) {
+            userRepository.save(user);
+        }
     }
 
     @RequestMapping(value = "/users", method=RequestMethod.GET)
@@ -37,12 +42,23 @@ public class UserRestController {
 
     @RequestMapping(value="/users/{id}", method=RequestMethod.PUT)
     public void update(@PathVariable("id") int id, @RequestBody User user) {
-        userRepository.update(id, user);
+
+        // 额外添加已存在的判断
+        User old  = userRepository.find(id);
+        if (old != null) {
+            userRepository.update(id, user);
+        }
     }
 
     @RequestMapping(value="/users/{id}", method=RequestMethod.DELETE)
     public ResponseEntity<Boolean> delete(@PathVariable("id") int id) {
-        userRepository.delete(id);
-        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+
+        // 额外添加已存在的判断
+        User old  = userRepository.find(id);
+        if (old != null) {
+            userRepository.delete(id);
+            return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+        }
+        return new ResponseEntity<Boolean>(Boolean.FALSE, HttpStatus.OK);
     }
 }
