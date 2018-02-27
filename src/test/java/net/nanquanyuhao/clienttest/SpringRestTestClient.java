@@ -3,9 +3,7 @@ package net.nanquanyuhao.clienttest;
 import net.nanquanyuhao.domain.User;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -22,14 +20,14 @@ public class SpringRestTestClient {
 
         // 原始代码中的使用方式
         // List<LinkedHashMap<String, Object>> usersMap = restTemplate.getForObject(REST_SERVICE_URI+"/users/", List.class);
-        User[] usersArray = restTemplate.getForObject(REST_SERVICE_URI+"/users/", User[].class);
+        User[] usersArray = restTemplate.getForObject(REST_SERVICE_URI+"/users", User[].class);
         List<User> usersMap = Arrays.asList(usersArray);
 
         if(usersMap != null){
             for(User map : usersMap){
                 System.out.println("User : id="+ map.getId() + ", Name=" + map.getName());
             }
-        }else{
+        } else {
             System.out.println("No user exist----------");
         }
     }
