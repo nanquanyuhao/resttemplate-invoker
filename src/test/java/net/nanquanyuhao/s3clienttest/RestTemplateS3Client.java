@@ -3,7 +3,9 @@ package net.nanquanyuhao.s3clienttest;
 import net.nanquanyuhao.s3clienttest.bouncycastle.HMACSHA1Util;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by nanquanyuhao on 2018/2/23.
@@ -17,12 +19,6 @@ public class RestTemplateS3Client {
     public static final String SECRET_KEY = "PGYW9UlUU1fcQgpAOx9bNYwtGjiKo9zhudSOMxeJ";
     // public static final String ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE";
     // public static final String SECRET_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
-
-    /**
-     * 全局数组
-     */
-    public final static String[] hexDigits = { "0", "1", "2", "3", "4", "5",
-            "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
     public static String buildStringToSign(){
 
